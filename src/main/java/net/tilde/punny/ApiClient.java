@@ -13,7 +13,6 @@ import okhttp3.Response;
  */
 public class ApiClient {
   private static String URL = "http://rhymebrain.com/talk?function=getRhymes&word=";
-  private static String RHYME = "heart";
   private static OkHttpClient client;
 
   public ApiClient() {
@@ -23,7 +22,7 @@ public class ApiClient {
 
   public String getRhymes(String rhyme) throws IOException {
     Request request = new Request.Builder()
-        .url(this.URL + this.RHYME)
+        .url(this.URL + rhyme)
         .build();
 
     Response response = client.newCall(request).execute();
