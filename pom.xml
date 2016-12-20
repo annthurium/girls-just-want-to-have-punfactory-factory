@@ -19,6 +19,12 @@
       <artifactId>okhttp</artifactId>
       <version>3.5.0</version>
     </dependency>
+    <dependency>
+      <groupId>com.google.truth</groupId>
+      <artifactId>truth</artifactId>
+      <version>0.30</version>
+      <scope>test</scope>
+    </dependency>
   </dependencies>
   <build>
     <finalName>pun-webapp</finalName>

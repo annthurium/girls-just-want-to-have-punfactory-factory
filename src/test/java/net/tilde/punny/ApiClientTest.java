@@ -16,6 +16,6 @@ public class ApiClientTest {
 
     if (result.length() < 1)
       throw new java.lang.RuntimeException();
-    System.out.println(result);
+    //System.out.println(result);
   }
 }
