@@ -12,7 +12,7 @@ import org.json.JSONException;
  * Created by tilde on 12/19/16.
  */
 public class PunfactoryMain {
-  public static void main(String[] args) throws IOException, JSONException {
+  public void main(String[] args) throws IOException, JSONException {
     ApiClient client = new ApiClient();
     String result = client.getRhymes("foo");
 
@@ -31,6 +31,7 @@ public class PunfactoryMain {
         rhymeResponseList.add(rhymeResponse);
       }
     }
+
 
 
   }
