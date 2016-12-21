@@ -17,7 +17,7 @@ public class PhraseReaderTest {
     PhraseReader phraseReader = new PhraseReader();
     List result = phraseReader.getPhrases();
 
-    assertThat(result.get(0)).isEqualTo("\"Frankly, my dear, I don't give a damn.\"");
+    assertThat(result.size()).isEqualTo(6813);
 
   }
 }

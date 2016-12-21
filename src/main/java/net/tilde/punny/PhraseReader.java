@@ -7,25 +7,34 @@ import com.google.common.io.Files;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
- * Created by tilde on 12/20/16.
+ * Reads phrases from multiple files.
+ * TODO make this a proper singleton.
  */
 public class PhraseReader {
-  // make this a list, but just read one file for now.
-  private static String fileSource = "/Users/tilde/code/girls-just-want-to-have-punfactory-factory/phrases/movie-quotes.txt";
-  private File file;
-  private CharSource source;
+  private static List<String> FILE_SOURCES = Arrays.asList("beatles-songs.txt", "best-selling-books.txt", "movie-quotes.txt", "oscar-winning-movies.txt", "wikipedia-idioms.txt");
+
+  private ArrayList<String> quotes;
+
   public PhraseReader() throws FileNotFoundException
   {
-    this.file = new File(fileSource);
-    this.source = Files.asCharSource(file, Charsets.UTF_8);
-
+    this.quotes = new ArrayList<String>();
   }
 
   public List<String> getPhrases() throws IOException {
-    List<String> lines = Files.readLines(file, Charsets.UTF_8);
-    return lines;
+    for (String filename : FILE_SOURCES) {
+      String FILE_PATH = "/Users/tilde/code/girls-just-want-to-have-punfactory-factory/phrases/";
+      File file = new File(FILE_PATH + filename);
+      CharSource source = Files.asCharSource(file, Charsets.UTF_8);
+      List<String> lines = Files.readLines(file, Charsets.UTF_8);
+      quotes.addAll(lines);
+
+    }
+    System.out.println(quotes.get(0));
+    return quotes;
   }
 }
