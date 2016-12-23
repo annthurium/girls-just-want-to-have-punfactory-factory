@@ -25,13 +25,10 @@ public class PunfactoryMain {
       if (score >= 300) {
         rhymes.add(String.valueOf(object.get("word")));
       }
-      PhraseReader phraseReader = new PhraseReader();
-      List phrases = phraseReader.getPhrases(rhymes);
-      System.out.println(phrases);
 
     }
-
-
+    PhraseReader phraseReader = new PhraseReader(rhymes);
+    List rhymingPhrases = phraseReader.getRhymingPhrases();
 
   }
 }

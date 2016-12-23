@@ -5,6 +5,7 @@ import static com.google.common.truth.Truth.assertThat;
 import org.junit.Test;
 
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -16,12 +17,12 @@ public class PhraseReaderTest {
 
   @Test
   public void testPhraseReader() throws IOException {
-    PhraseReader phraseReader = new PhraseReader();
-    Set<String> set = new HashSet<String>();
-    set.add("foo");
-    List result = phraseReader.getPhrases(set);
-
-    assertThat(result.size()).isEqualTo(6813);
+    String[] heartRhymes = {"art", "mart", "part", "start", "cart", "smart", "dart", "rampart",
+                            "impart", "counterpart", "tart", "depart", "chart", "apart"};
+    Set<String> set = new HashSet<String>(Arrays.asList(heartRhymes));
+    PhraseReader phraseReader = new PhraseReader(set);
+    List rhymingPhrases = phraseReader.getRhymingPhrases();
+    assertThat(rhymingPhrases.size()).isEqualTo(32);
 
   }
 }
