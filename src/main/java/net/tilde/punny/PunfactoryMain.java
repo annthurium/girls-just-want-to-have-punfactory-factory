@@ -28,10 +28,9 @@ public class PunfactoryMain {
       }
 
     }
-    PhraseReader phraseReader = new PhraseReader(rhymes, rhyme);
-    List rhymingPhrases = phraseReader.getRhymingPhrases();
+    RhymeGetter rhymeGetter = new RhymeGetter(rhymes, rhyme);
+    List rhymingPhrases = rhymeGetter.getRhymingPhrases();
     System.out.println(rhymingPhrases);
-    System.out.println(rhymes);
 
   }
 }

@@ -13,7 +13,7 @@ import java.util.Set;
 /**
  * Created by tilde on 12/20/16.
  */
-public class PhraseReaderTest {
+public class RhymeGetterTest {
 
   @Test
   public void testPhraseReader() throws IOException {
@@ -21,8 +21,8 @@ public class PhraseReaderTest {
                             "impart", "counterpart", "tart", "depart", "chart", "apart"};
     String rhyme = "heart";
     Set<String> set = new HashSet<String>(Arrays.asList(heartRhymes));
-    PhraseReader phraseReader = new PhraseReader(set, rhyme);
-    List rhymingPhrases = phraseReader.getRhymingPhrases();
+    RhymeGetter rhymeGetter = new RhymeGetter(set, rhyme);
+    List rhymingPhrases = rhymeGetter.getRhymingPhrases();
     assertThat(rhymingPhrases.size()).isEqualTo(32);
 
   }

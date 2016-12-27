@@ -16,15 +16,15 @@ import java.util.stream.Stream;
  * Reads phrases from multiple files.
  * Gets a list of phrases that contain one of the passed-in rhymes.
  */
-public final class PhraseReader {
+public final class RhymeGetter {
   private static List<String> FILE_SOURCES = Arrays.asList("beatles-songs.txt", "best-selling-books.txt", "movie-quotes.txt", "oscar-winning-movies.txt", "wikipedia-idioms.txt");
   private ArrayList<String> quotes;
   private Set<String> rhymes;
-  private Set<String> rhymesCopy;
+  //private Set<String> rhymesCopy;
   private String wordToReplace;
   private String newWord;
 
-  public PhraseReader(Set<String> rhymes, String wordToReplace) throws FileNotFoundException
+  public RhymeGetter(Set<String> rhymes, String wordToReplace) throws FileNotFoundException
   {
     this.quotes = new ArrayList<String>();
     this.rhymes = rhymes;
@@ -32,25 +32,27 @@ public final class PhraseReader {
   }
 
   public String punnifyString(String line) {
-    return line.replace(this.newWord, this.wordToReplace);
+    String punPhrase = line.replace(this.newWord, this.wordToReplace);
+    String punAndOriginalPhrase = String.format("%s (pun of %s)", punPhrase, line);
+    return punAndOriginalPhrase;
   }
 
   public boolean containsRhyme(String line) {
     // If "part" is a rhyme, we should match "part and parcel" but not "crash the party"
     // Split on word boundaries to ensure exact rhyme matching.
     Set<String> parts = new HashSet<String>(Arrays.asList(line.split("\\s+")));
-    this.rhymesCopy = new HashSet<>(this.rhymes);
+    Set<String> rhymesCopy = new HashSet<>(this.rhymes);
     /*
     Reducing time complexity here by doing set membership comparison
     instead of iterating though the list of rhymes every time.
     Tradeoff: taking more space by making a new set every time.
     */
-    this.rhymesCopy.retainAll(parts);
-    if (!this.rhymesCopy.isEmpty()) {
-      System.out.println(this.rhymesCopy);
+    rhymesCopy.retainAll(parts);
+    if (!rhymesCopy.isEmpty()) {
+      // if there are more than 2 rhymes in the phrase, just take the first one
       this.newWord = rhymesCopy.iterator().next();
     }
-    return !this.rhymesCopy.isEmpty();
+    return !rhymesCopy.isEmpty();
   }
 
   public List<String> getRhymingPhrases() throws IOException {
