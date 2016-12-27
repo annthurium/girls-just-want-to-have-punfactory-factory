@@ -20,22 +20,37 @@ public final class PhraseReader {
   private static List<String> FILE_SOURCES = Arrays.asList("beatles-songs.txt", "best-selling-books.txt", "movie-quotes.txt", "oscar-winning-movies.txt", "wikipedia-idioms.txt");
   private ArrayList<String> quotes;
   private Set<String> rhymes;
+  private Set<String> rhymesCopy;
+  private String wordToReplace;
+  private String newWord;
 
-  public PhraseReader(Set<String> rhymes) throws FileNotFoundException
+  public PhraseReader(Set<String> rhymes, String wordToReplace) throws FileNotFoundException
   {
     this.quotes = new ArrayList<String>();
     this.rhymes = rhymes;
+    this.wordToReplace = wordToReplace;
+  }
+
+  public String punnifyString(String line) {
+    return line.replace(this.newWord, this.wordToReplace);
   }
 
   public boolean containsRhyme(String line) {
     // If "part" is a rhyme, we should match "part and parcel" but not "crash the party"
     // Split on word boundaries to ensure exact rhyme matching.
     Set<String> parts = new HashSet<String>(Arrays.asList(line.split("\\s+")));
-    Set <String> rhymesCopy = new HashSet<>(this.rhymes);
-    // Trading space for some time complexity here by doing set membership comparison
-    // instead of iterating though the list of rhymes every time.
-    rhymesCopy.retainAll(parts);
-    return !rhymesCopy.isEmpty();
+    this.rhymesCopy = new HashSet<>(this.rhymes);
+    /*
+    Reducing time complexity here by doing set membership comparison
+    instead of iterating though the list of rhymes every time.
+    Tradeoff: taking more space by making a new set every time.
+    */
+    this.rhymesCopy.retainAll(parts);
+    if (!this.rhymesCopy.isEmpty()) {
+      System.out.println(this.rhymesCopy);
+      this.newWord = rhymesCopy.iterator().next();
+    }
+    return !this.rhymesCopy.isEmpty();
   }
 
   public List<String> getRhymingPhrases() throws IOException {
@@ -46,6 +61,7 @@ public final class PhraseReader {
         list = stream
 
         .filter(line -> this.containsRhyme(line))
+            .map(line -> this.punnifyString(line))
         .collect(Collectors.toList());
 
       } catch (IOException e) {
@@ -53,6 +69,7 @@ public final class PhraseReader {
       }
       quotes.addAll(list);
     }
+    System.out.println(quotes);
     return quotes;
   }
 

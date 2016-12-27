@@ -15,7 +15,8 @@ import java.util.Set;
 public class PunfactoryMain {
   public static void main(String[] args) throws IOException, JSONException {
     ApiClient client = new ApiClient();
-    String result = client.getRhymes("heart");
+    String rhyme = "heart";
+    String result = client.getRhymes(rhyme);
 
     JSONArray array = new JSONArray(result);
     Set<String> rhymes = new HashSet<String>();
@@ -27,8 +28,10 @@ public class PunfactoryMain {
       }
 
     }
-    PhraseReader phraseReader = new PhraseReader(rhymes);
+    PhraseReader phraseReader = new PhraseReader(rhymes, rhyme);
     List rhymingPhrases = phraseReader.getRhymingPhrases();
+    System.out.println(rhymingPhrases);
+    System.out.println(rhymes);
 
   }
 }

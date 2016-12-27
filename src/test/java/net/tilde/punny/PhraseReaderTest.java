@@ -19,8 +19,9 @@ public class PhraseReaderTest {
   public void testPhraseReader() throws IOException {
     String[] heartRhymes = {"art", "mart", "part", "start", "cart", "smart", "dart", "rampart",
                             "impart", "counterpart", "tart", "depart", "chart", "apart"};
+    String rhyme = "heart";
     Set<String> set = new HashSet<String>(Arrays.asList(heartRhymes));
-    PhraseReader phraseReader = new PhraseReader(set);
+    PhraseReader phraseReader = new PhraseReader(set, rhyme);
     List rhymingPhrases = phraseReader.getRhymingPhrases();
     assertThat(rhymingPhrases.size()).isEqualTo(32);
 
