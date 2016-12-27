@@ -5,7 +5,8 @@ import org.junit.Test;
 import java.io.IOException;
 
 /**
- * Created by tilde on 12/17/16.
+ * Note: if rhyme brain changes their api, or goes down, this test will fail.
+ * It would be better to create an interface so we can easily mock the api response in tests.
  */
 public class ApiClientTest {
 
@@ -16,6 +17,5 @@ public class ApiClientTest {
 
     if (result.length() < 1)
       throw new java.lang.RuntimeException();
-    //System.out.println(result);
   }
 }

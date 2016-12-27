@@ -45,7 +45,7 @@ public final class RhymeGetter {
     /*
     Reducing time complexity here by doing set membership comparison
     instead of iterating though the list of rhymes every time.
-    Tradeoff: taking more space by making a new set every time.
+    Tradeoff: we are making a new set every iteration.
     */
     rhymesCopy.retainAll(parts);
     if (!rhymesCopy.isEmpty()) {

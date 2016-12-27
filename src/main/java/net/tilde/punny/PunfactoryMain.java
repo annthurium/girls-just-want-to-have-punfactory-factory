@@ -10,13 +10,14 @@ import java.util.List;
 import java.util.Set;
 
 /**
- * Created by tilde on 12/19/16.
+ * Takes a word, returns a list of cringeworthy puns phrases based around that word.
+ * Example: "heart" -> "heart before the horse (pun of cart before the horse)".
  */
 public class PunfactoryMain {
   public static void main(String[] args) throws IOException, JSONException {
     ApiClient client = new ApiClient();
-    String rhyme = "heart";
-    String result = client.getRhymes(rhyme);
+    String originalWord = args[0];
+    String result = client.getRhymes(originalWord);
 
     JSONArray array = new JSONArray(result);
     Set<String> rhymes = new HashSet<String>();
@@ -28,7 +29,7 @@ public class PunfactoryMain {
       }
 
     }
-    RhymeGetter rhymeGetter = new RhymeGetter(rhymes, rhyme);
+    RhymeGetter rhymeGetter = new RhymeGetter(rhymes, originalWord);
     List rhymingPhrases = rhymeGetter.getRhymingPhrases();
     System.out.println(rhymingPhrases);
 

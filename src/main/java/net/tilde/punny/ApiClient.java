@@ -1,15 +1,16 @@
 package net.tilde.punny;
 
-import java.io.IOException;
-import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
-import okhttp3.RequestBody;
 import okhttp3.Response;
+
+import java.io.IOException;
 
 
 /**
- * Created by tilde on 12/17/16.
+ * Makes a call to RhymeBrain api, returns some json.
+ * Example result:
+ * [ {"word":"art","freq":25,"score":300,"flags":"bc","syllables":"1"} ]
  */
 public class ApiClient {
   private static String URL = "http://rhymebrain.com/talk?function=getRhymes&word=";
